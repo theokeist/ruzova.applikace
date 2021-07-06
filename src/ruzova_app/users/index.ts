@@ -37,12 +37,14 @@ const createUser = async (user: any) => {
 export function useCreateUser(user: User) {
   return useMutation(() => createUser(user), {
     onSuccess: async (data) => {
+      // @ts-ignore
+      const ID = data?.id || data?.user?.id;
       console.log(data)
       const { data: insertData, error: insertError } = await supabase
         .from('profiles')
         .insert({
           username: user?.username,
-          id: data?.id
+          id: ID
         },{ returning: 'minimal' })
 
       if(insertError) {
