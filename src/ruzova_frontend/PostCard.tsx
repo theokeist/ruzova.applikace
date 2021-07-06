@@ -107,7 +107,7 @@ const PostCard = ({ postsProps, noStories = false }: any) => {
               disableSpacing
             >
               <Grid container direction="column">
-                <Typography variant="caption" style={{ fontWeight: "900" }}>
+                <Typography variant="caption" style={{ fontWeight: "bold" }}>
                   {randomProfile}
                 </Typography>
                 <Typography
@@ -160,7 +160,7 @@ const PostCard = ({ postsProps, noStories = false }: any) => {
               disableSpacing
             >
               <Grid container direction="column">
-                <Typography variant="caption" style={{ fontWeight: "900" }}>
+                <Typography variant="caption" style={{ fontWeight: "bold" }}>
                   {randomProfile}
                 </Typography>
                 <Typography
