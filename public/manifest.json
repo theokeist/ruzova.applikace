@@ -3,7 +3,7 @@
   "short_name": "Růžová.app",
   "theme_color": "#fff5f5",
   "background_color": "#fff5f5",
-  "display": "fullscreen",
+  "display": "standalone",
   "orientation": "portrait",
   "scope": "/",
   "start_url": "/",

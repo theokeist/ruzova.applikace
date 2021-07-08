@@ -11,14 +11,17 @@ import {
   IconButton,
   SwipeableDrawer,
   Icon,
+  TextField,
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import DynamicFeedIcon from "@material-ui/icons/DynamicFeed";
 import { useUser } from "../ruzova_app/users";
 import AvatarProfile from "./Avatar";
+import { useRuzovaTheme } from "./_ruzovaTheme";
 
 const BottomSwipe = ({ toggleDrawer, state, setState }: any) => {
   const classes = useStyles();
+  const ruzova = useRuzovaTheme();
 
   const user = useUser();
   console.log("NOW", user.data);
@@ -36,7 +39,7 @@ const BottomSwipe = ({ toggleDrawer, state, setState }: any) => {
       <div className={classes.content}>
         <Grid
           container
-          alignItems="center"
+          alignItems="flex-start"
           spacing={1}
           className={classes.drawer}
         >
@@ -50,7 +53,13 @@ const BottomSwipe = ({ toggleDrawer, state, setState }: any) => {
             </Grid>
           )}
           <Grid xs={10} item>
-            <Typography>Ahoj jak se mas</Typography>
+            <TextField
+              className={ruzova.button}
+              value={"Ahoj jak se mas"}
+              rows={4}
+              variant="outlined"
+              multiline
+            ></TextField>
           </Grid>
         </Grid>
 
@@ -117,6 +126,10 @@ const useStyles = makeStyles((theme) => ({
     cursor: "pointer",
     width: theme.spacing(6),
     height: theme.spacing(6),
+  },
+  textField: {
+    borderTopLeftRadius: 0,
+    borderTopRightRadius: 25,
   },
 }));
 

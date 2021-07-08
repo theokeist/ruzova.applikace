@@ -36,16 +36,14 @@ const BottomMenu = ({ setDrawer, setState }: any) => {
           className={classes.drawer}
         >
           <Grid xs={2} onClick={setDrawer(true)} item>
-            <Link href="/create-post">
-              {user && user?.data?.avatar_url && (
-                <AvatarProfile
-                  className={classes.avatar}
-                  url={user?.data?.avatar_url}
-                  size={30}
-                  stories
-                />
-              )}
-            </Link>
+            {user && user?.data?.avatar_url && (
+              <AvatarProfile
+                className={classes.avatar}
+                url={user?.data?.avatar_url}
+                size={30}
+                stories
+              />
+            )}
           </Grid>
           <Grid xs={10} item>
             <Typography>Ahoj jak se mas</Typography>
