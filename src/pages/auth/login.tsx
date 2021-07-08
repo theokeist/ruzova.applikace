@@ -2,12 +2,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import { useLogin } from "../../ruzova_app/users";
-import {
-  Grid,
-  TextField,
-  IconButton,
-  CircularProgress,
-} from "@material-ui/core";
+import { Grid, Button, TextField, CircularProgress } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useRuzovaTheme } from "../../ruzova_frontend/_ruzovaTheme";
 
@@ -60,17 +55,19 @@ export default function Login() {
           fullWidth
         />
 
-        <IconButton
+        <Button
+          variant="contained"
+          fullWidth
           color="primary"
           className={`${ruzova.button} ${classes.buttonDown}`}
           onClick={() => loginMutation.mutate()}
         >
           {loginMutation.isLoading ? (
-            <CircularProgress />
+            <span>...</span>
           ) : (
             <span>Přihlásit se</span>
           )}{" "}
-        </IconButton>
+        </Button>
       </Grid>
     </Grid>
   );

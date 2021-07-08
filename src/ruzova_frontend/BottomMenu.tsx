@@ -6,6 +6,7 @@ import {
   Avatar,
   Button,
   Typography,
+  Divider,
   IconButton,
 } from "@material-ui/core";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
@@ -29,9 +30,9 @@ const BottomMenu = ({ setDrawer, setState }: any) => {
         <>
           <Grid item>
             <Link href="/create-post">
-              <Button variant="outlined" color="primary">
+              <IconButton color="primary">
                 <AddIcon />
-              </Button>
+              </IconButton>
             </Link>
           </Grid>
           <Grid item>

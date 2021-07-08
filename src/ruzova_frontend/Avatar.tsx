@@ -67,34 +67,34 @@ const AvatarProfile = ({
     }
   }
 
-  async function uploadAvatar(event: any) {
-    try {
-      setUploading(true);
+  // async function uploadAvatar(event: any) {
+  //   try {
+  //     setUploading(true);
 
-      if (!event.target.files || event.target.files.length === 0) {
-        throw new Error("You must select an image to upload.");
-      }
+  //     if (!event.target.files || event.target.files.length === 0) {
+  //       throw new Error("You must select an image to upload.");
+  //     }
 
-      const file = event.target.files[0];
-      const fileExt = file.name.split(".").pop();
-      const fileName = `${Math.random()}.${fileExt}`;
-      const filePath = `${fileName}`;
+  //     const file = event.target.files[0];
+  //     const fileExt = file.name.split(".").pop();
+  //     const fileName = `${Math.random()}.${fileExt}`;
+  //     const filePath = `${fileName}`;
 
-      let { error: uploadError } = await supabase.storage
-        .from("avatars")
-        .upload(filePath, file);
+  //     let { error: uploadError } = await supabase.storage
+  //       .from("avatars")
+  //       .upload(filePath, file);
 
-      if (uploadError) {
-        throw uploadError;
-      }
+  //     if (uploadError) {
+  //       throw uploadError;
+  //     }
 
-      onUpload(filePath);
-    } catch (error) {
-      alert(error.message);
-    } finally {
-      setUploading(false);
-    }
-  }
+  //     onUpload(filePath);
+  //   } catch (error) {
+  //     alert(error.message);
+  //   } finally {
+  //     setUploading(false);
+  //   }
+  // }
 
   return (
     <>
@@ -114,7 +114,7 @@ const AvatarProfile = ({
           className={largeAvatar ? classes.large : classes.normal}
         />
       )}
-      {!hideUpload ? (
+      {/* {!hideUpload ? (
         <FormControl component="form">
           <FormControlLabel
             control={
@@ -142,12 +142,7 @@ const AvatarProfile = ({
         </FormControl>
       ) : (
         <></>
-      )}
-      {username && (
-        <Typography variant="h4" className={classes.username} gutterBottom>
-          {username}
-        </Typography>
-      )}
+      )} */}
     </>
   );
 };

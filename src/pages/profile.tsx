@@ -108,7 +108,7 @@ export default function Profile() {
   };
   return (
     <PrivateRoute>
-      <Grid className={classes?.ONE}>
+      <Grid container justify="center" className={classes?.ONE}>
         <Grid
           container
           item
@@ -160,15 +160,18 @@ export default function Profile() {
           fullWidth
         />
 
-        <RuzovaButton
-          text="Uložit změny"
-          clickable={updateProfileHandler}
-        ></RuzovaButton>
+        <Button color="primary" fullWidth onClick={updateProfileHandler}>
+          Aktualizovat
+        </Button>
 
-        <RuzovaButton
-          text="Odhlásit se"
-          clickable={logoutMutation}
-        ></RuzovaButton>
+        <Button
+          variant="outlined"
+          color="secondary"
+          fullWidth
+          onClick={() => logoutMutation.mutate()}
+        >
+          Odhlásit se
+        </Button>
       </Grid>
     </PrivateRoute>
   );

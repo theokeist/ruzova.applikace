@@ -1,13 +1,7 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useCreateUser } from "../../ruzova_app/users";
-import {
-  Grid,
-  TextField,
-  IconButton,
-  Button,
-  CircularProgress,
-} from "@material-ui/core";
+import { Grid, TextField, Button, CircularProgress } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Image from "next/image";
 import { useRuzovaTheme } from "../../ruzova_frontend/_ruzovaTheme";
@@ -29,9 +23,7 @@ export default function Signup() {
 
   if (createUserMutation?.isSuccess) {
     router.push("/");
-  }
-
-  {
+  } else {
     createUserMutation?.isError && (
       <p className="text-sm mb-8 text-red-500">
         {createUserMutation?.error?.message}
@@ -78,17 +70,19 @@ export default function Signup() {
           fullWidth
         />
 
-        <IconButton
+        <Button
+          variant="contained"
+          fullWidth
           color="primary"
           className={`${ruzova.button} ${classes.button}`}
           onClick={() => createUserMutation.mutate()}
         >
           {createUserMutation.isLoading ? (
-            <CircularProgress />
+            <span>...</span>
           ) : (
             <span>Registrovat se</span>
           )}{" "}
-        </IconButton>
+        </Button>
       </Grid>
     </Grid>
   );

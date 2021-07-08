@@ -7,7 +7,14 @@ import BottomMenu from "../ruzova_frontend/BottomMenu";
 import { makeStyles } from "@material-ui/core/styles";
 
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
-import { Button, Grid, Typography, IconButton, Icon } from "@material-ui/core";
+import {
+  Button,
+  Grid,
+  Typography,
+  IconButton,
+  Icon,
+  Divider,
+} from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import DynamicFeedIcon from "@material-ui/icons/DynamicFeed";
 import Head from "next/head";
@@ -17,8 +24,7 @@ import AvatarProfile from "../ruzova_frontend/Avatar";
 import { CssBaseline } from "@material-ui/core";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
-
-import { useUser } from "../ruzova_app/users";
+import BottomSwipe from "../ruzova_frontend/BottomSwipe";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -49,7 +55,6 @@ const theme = createMuiTheme({
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [state, setState] = useState(false);
-  const user = { avatarUrl: "asas" };
   const classes = useStyles();
 
   useEffect(() => {
@@ -89,74 +94,6 @@ function MyApp({ Component, pageProps }: AppProps) {
           alignItems="center"
           style={{ height: "100vh", flexWrap: "nowrap" }}
         >
-          <SwipeableDrawer
-            anchor={"bottom"}
-            className={classes.root}
-            open={state}
-            onClose={toggleDrawer(false)}
-            onOpen={toggleDrawer(true)}
-            swipeAreaWidth={20}
-          >
-            <div className={classes.content}>
-              <Grid
-                container
-                alignItems="center"
-                spacing={1}
-                className={classes.drawer}
-              >
-                {user && user.avatarUrl && (
-                  <Grid xs={2} item>
-                    <AvatarProfile
-                      className={classes.avatar}
-                      url={user.avatarUrl}
-                      size={30}
-                      hideUpload={true}
-                    />
-                  </Grid>
-                )}
-                <Grid xs={10} item>
-                  <Typography>Ahoj jak se mas</Typography>
-                </Grid>
-              </Grid>
-
-              <Grid
-                className={classes.nav}
-                container
-                alignItems="baseline"
-                justify="space-around"
-              >
-                <Link href="/feed">
-                  <IconButton onClick={() => setState(false)}>
-                    <DynamicFeedIcon />
-                  </IconButton>
-                </Link>
-                {user && (
-                  <Link href="/profile">
-                    <IconButton onClick={() => setState(false)}>
-                      <ExpandMoreIcon />
-                    </IconButton>
-                  </Link>
-                )}
-                <Link href="/profile">
-                  <IconButton onClick={() => setState(false)}>
-                    <Icon>
-                      <Image src="/logo.png" layout="fill" />
-                    </Icon>
-                  </IconButton>
-                </Link>
-              </Grid>
-
-              <Grid style={{ padding: "11px" }}>
-                <Typography
-                  variant="h5"
-                  style={{ fontWeight: "bold" }}
-                  gutterBottom
-                >
-                  Stories
-                </Typography>
-              </Grid>
-            </div>
-          </SwipeableDrawer>
           <Grid
             container
             item
@@ -165,6 +102,8 @@ function MyApp({ Component, pageProps }: AppProps) {
           >
             <Component {...pageProps} />
           </Grid>
+          <Divider style={{ width: "100%", height: "5px" }} />
+
           <Grid
             container
             item
@@ -173,16 +112,23 @@ function MyApp({ Component, pageProps }: AppProps) {
             xs={1}
             style={{
               width: "100vw",
+              height: "60px",
               maxWidth: "100%",
+              zIndex: 1000,
               backgroundColor: "white",
               position: "fixed",
               bottom: "0px",
             }}
           >
             <BottomMenu setDrawer={toggleDrawer}></BottomMenu>
+            <BottomSwipe
+              toggleDrawer={toggleDrawer}
+              state={state}
+              setState={setState}
+            />
           </Grid>
         </Grid>
-        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </ThemeProvider>
   );
