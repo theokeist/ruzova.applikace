@@ -18,13 +18,40 @@ import DynamicFeedIcon from "@material-ui/icons/DynamicFeed";
 import { useUser } from "../ruzova_app/users";
 import AvatarProfile from "./Avatar";
 import { useRuzovaTheme } from "./_ruzovaTheme";
+import supabase from "../ruzova_app/_supabase";
 
-const BottomSwipe = ({ toggleDrawer, state, setState }: any) => {
+const BottomSwipe = ({ user, toggleDrawer, state, setState }: any) => {
   const classes = useStyles();
   const ruzova = useRuzovaTheme();
+  const [livePost, setLivePost] = React.useState("");
+  async function updateProfile(live_post: any) {
+    try {
+      const updates = {
+        id: user?.data?.id,
+        live_post: live_post,
+        updated_at: new Date(),
+      };
 
-  const user = useUser();
-  console.log("NOW", user.data);
+      let { error } = await supabase.from("profiles").update(updates);
+
+      if (error) {
+        throw error;
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  const handleLivePost = (event: any) => {
+    const data = event.target.value;
+    updateProfile(data);
+  };
+
+  React.useEffect(() => {
+    if (!livePost) setLivePost(user?.data?.live_post);
+    updateProfile(livePost);
+  }, [livePost, user]);
+
   return (
     <SwipeableDrawer
       anchor={"bottom"}
@@ -35,14 +62,10 @@ const BottomSwipe = ({ toggleDrawer, state, setState }: any) => {
       swipeAreaWidth={25}
       disableDiscovery
       disableSwipeToOpen
+      transitionDuration={850}
     >
       <div className={classes.content}>
-        <Grid
-          container
-          alignItems="flex-start"
-          spacing={1}
-          className={classes.drawer}
-        >
+        <Grid container alignItems="flex-start" className={classes.drawer}>
           {user && user?.data?.avatar_url && (
             <Grid xs={2} item>
               <AvatarProfile
@@ -54,11 +77,13 @@ const BottomSwipe = ({ toggleDrawer, state, setState }: any) => {
           )}
           <Grid xs={10} item>
             <TextField
-              className={ruzova.button}
-              value={"Ahoj jak se mas"}
+              className={ruzova.input}
+              value={livePost}
+              onChange={(e) => setLivePost(e.target.value)}
               rows={4}
               variant="outlined"
               multiline
+              fullWidth
             ></TextField>
           </Grid>
         </Grid>

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import supabase from "../ruzova_app/_supabase";
-import { Card, Grid, Typography } from "@material-ui/core";
+import { Card, Grid, Typography, CircularProgress } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import PostCard from "../ruzova_frontend/PostCard";
 import PrivateRoute from "../ruzova_frontend/auth/PrivateRoute";
@@ -16,40 +16,31 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 export default function Feed() {
   const classes = useStyles();
-  //const [posts, setPosts] = useState<any>([]);
-
-  const posts = [
-    {
-      id: 1,
-      title:
-        "AhojAhojAhojAhojAhoj AhojAhoj AhojAhojAhojAhoj. AhojAhoj AhojAhoj. AhojAhoj....",
-    },
-    { id: 2, title: "NihNiha oao Nih a o NihaoNihao? NihaoNihao." },
-    { id: 3, title: "Ahoj" },
-    { id: 4, title: "Nihas df sssdfsdf o" },
-    { id: 5, title: "Ahoj" },
-    { id: 6, title: "Nihao" },
-    { id: 7, title: "Aho  sdfsdf sdf j" },
-    { id: 8, title: "Nihao" },
-    { id: 9, title: "Ahoj" },
-    { id: 10, title: "Nsdfsdf sdfsdf sd sdf ssdf sdfihao" },
-    { id: 11, title: "Ahoj" },
-    { id: 12, title: "Nihao" },
-    { id: 13, title: "Ahoj" },
-    { id: 14, title: "Nihasd as asdfs sdfsdfsdfs  sdf sdf ao" },
-    { id: 15, title: "Ahoj" },
-  ];
+  const [posts, setPosts] = useState<any>([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     fetchPosts();
   }, []);
   async function fetchPosts() {
-    const { data, error } = await supabase.from("posts").select();
-    //setPosts(data);
+    const { data, error } = await supabase.from("profiles").select();
+    setPosts(data);
     setLoading(false);
   }
-  if (loading) return <p className="text-2xl">Loading ...</p>;
-  if (!posts?.length) return <p className="text-2xl">No posts.</p>;
+  if (loading)
+    return (
+      <Grid
+        style={{
+          display: "flex",
+          width: "100%",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "585px",
+        }}
+      >
+        <CircularProgress />;
+      </Grid>
+    );
+  if (!posts?.length) return <Typography variant="h3">No posts :-/</Typography>;
 
   return (
     <PrivateRoute>
@@ -60,9 +51,9 @@ export default function Feed() {
         {posts.map((post: any, index: any) => (
           <Link key={post.id} href={`/posts/${post.id}`}>
             {index % 7 === 0 ? (
-              <PostCard key={index} postsProps={post} noStories></PostCard>
+              <PostCard key={post.id} postsProps={post} noStories></PostCard>
             ) : (
-              <PostCard key={index} postsProps={post}></PostCard>
+              <PostCard key={post.id} postsProps={post}></PostCard>
             )}
           </Link>
         ))}

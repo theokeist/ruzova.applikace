@@ -16,15 +16,9 @@ import LockOpenIcon from "@material-ui/icons/LockOpen";
 import LockIcon from "@material-ui/icons/Lock";
 import HomeIcon from "@material-ui/icons/Home";
 import AvatarProfile from "./Avatar";
-const BottomMenu = ({ setDrawer, setState }: any) => {
+const BottomMenu = ({ user, setDrawer, setState }: any) => {
   const classes = useStyles();
 
-  const user = useUser();
-  console.log(
-    "BottomMenu - user is useQuery not Session",
-    { ...user },
-    "IN CASE USER TEXT DOWN THERE"
-  );
   return (
     <>
       {user.isSuccess ? (
@@ -46,7 +40,9 @@ const BottomMenu = ({ setDrawer, setState }: any) => {
             )}
           </Grid>
           <Grid xs={10} item>
-            <Typography>Ahoj jak se mas</Typography>
+            <Typography className={classes.titleExpanded}>
+              {user?.data?.live_post}
+            </Typography>
           </Grid>
         </Grid>
       ) : (
@@ -100,6 +96,13 @@ const useStyles = makeStyles((theme) => ({
   },
   drawer: {
     padding: "11px",
+  },
+  titleExpanded: {
+    maxWidth: "100%",
+    overflow: "hidden",
+    textAlign: "justify",
+    whiteSpace: "nowrap",
+    textOverflow: "ellipsis",
   },
 }));
 

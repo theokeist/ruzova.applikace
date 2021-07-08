@@ -108,13 +108,13 @@ const PostCard = ({ postsProps, noStories = false }: any) => {
             >
               <Grid container direction="column">
                 <Typography variant="caption" style={{ fontWeight: "bold" }}>
-                  {randomProfile}
+                  {post?.username}
                 </Typography>
                 <Typography
                   variant="body1"
                   className={expanded ? classes.title : classes.titleExpanded}
                 >
-                  {post?.title}
+                  {post?.live_post}
                 </Typography>
               </Grid>
             </CardActions>
@@ -167,7 +167,7 @@ const PostCard = ({ postsProps, noStories = false }: any) => {
                   variant="body1"
                   className={expanded ? classes.title : classes.titleExpanded}
                 >
-                  {post?.title}
+                  {post?.live_post}
                 </Typography>
               </Grid>
             </CardActions>

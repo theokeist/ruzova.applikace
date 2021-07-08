@@ -3,28 +3,13 @@ import "../../styles/globals.css";
 import type { AppProps } from "next/app";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
-import BottomMenu from "../ruzova_frontend/BottomMenu";
 import { makeStyles } from "@material-ui/core/styles";
-
-import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
-import {
-  Button,
-  Grid,
-  Typography,
-  IconButton,
-  Icon,
-  Divider,
-} from "@material-ui/core";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import DynamicFeedIcon from "@material-ui/icons/DynamicFeed";
+import { Grid, Typography } from "@material-ui/core";
 import Head from "next/head";
-import Image from "next/image";
-import Link from "next/link";
-import AvatarProfile from "../ruzova_frontend/Avatar";
 import { CssBaseline } from "@material-ui/core";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
-import BottomSwipe from "../ruzova_frontend/BottomSwipe";
+import Footer from "../ruzova_frontend/Footer";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -54,7 +39,6 @@ const theme = createMuiTheme({
 });
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [state, setState] = useState(false);
   const classes = useStyles();
 
   useEffect(() => {
@@ -65,17 +49,6 @@ function MyApp({ Component, pageProps }: AppProps) {
     }
   }, []);
 
-  const toggleDrawer = (open: any) => (event: any) => {
-    if (
-      event &&
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      return;
-    }
-
-    setState(open);
-  };
   return (
     <ThemeProvider theme={theme}>
       <QueryClientProvider client={queryClient}>
@@ -103,29 +76,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             <Component {...pageProps} />
           </Grid>
 
-          <Grid
-            container
-            item
-            justify="space-evenly"
-            alignItems="center"
-            spacing={1}
-            style={{
-              width: "100vw",
-              height: "auto",
-              maxWidth: "100%",
-              zIndex: 1000,
-              backgroundColor: "white",
-              position: "fixed",
-              bottom: "0px",
-            }}
-          >
-            <BottomMenu setDrawer={toggleDrawer}></BottomMenu>
-            <BottomSwipe
-              toggleDrawer={toggleDrawer}
-              state={state}
-              setState={setState}
-            />
-          </Grid>
+          <Footer />
         </Grid>
         {/* <ReactQueryDevtools initialIsOpen={false} /> */}
       </QueryClientProvider>
