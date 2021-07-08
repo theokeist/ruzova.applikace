@@ -34,6 +34,13 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(5),
     fontWeight: 900,
   },
+  avatar: {
+    border: "4px solid #FF96C8",
+    borderColor: theme?.palette.primary.main,
+    cursor: "pointer",
+    width: theme.spacing(6),
+    height: theme.spacing(6),
+  },
 }));
 const AvatarProfile = ({
   url,
@@ -43,6 +50,7 @@ const AvatarProfile = ({
   center = false,
   username,
   onUpload,
+  stories = false,
 }: any) => {
   const classes = useStyles();
   const [avatarUrl, setAvatarUrl] = useState<any>(null);
@@ -98,17 +106,22 @@ const AvatarProfile = ({
 
   return (
     <>
-      {avatarUrl ? (
+      {avatarUrl && stories ? (
         <>
           <Avatar
             src={avatarUrl}
             alt="Avatar"
             component="div"
-            className={largeAvatar ? classes.large : classes.normal}
+            className={
+              largeAvatar
+                ? `${classes.large} ${classes.avatar}`
+                : `${classes.normal} ${classes.avatar}`
+            }
           />
         </>
       ) : (
         <Avatar
+          src={avatarUrl}
           alt="Avatar"
           component="div"
           className={largeAvatar ? classes.large : classes.normal}

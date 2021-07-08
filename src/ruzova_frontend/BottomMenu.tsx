@@ -15,6 +15,7 @@ import { useUser } from "../ruzova_app/users";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 import LockIcon from "@material-ui/icons/Lock";
 import HomeIcon from "@material-ui/icons/Home";
+import AvatarProfile from "./Avatar";
 const BottomMenu = ({ setDrawer, setState }: any) => {
   const classes = useStyles();
 
@@ -27,25 +28,37 @@ const BottomMenu = ({ setDrawer, setState }: any) => {
   return (
     <>
       {user.isSuccess ? (
-        <>
-          <Grid item>
+        <Grid
+          container
+          alignItems="center"
+          justify="space-evenly"
+          spacing={1}
+          className={classes.drawer}
+        >
+          <Grid xs={2} onClick={setDrawer(true)} item>
             <Link href="/create-post">
-              <IconButton color="primary">
-                <AddIcon />
-              </IconButton>
+              {user && user?.data?.avatar_url && (
+                <AvatarProfile
+                  className={classes.avatar}
+                  url={user?.data?.avatar_url}
+                  size={30}
+                  stories
+                />
+              )}
             </Link>
           </Grid>
-          <Grid item>
+          <Grid xs={10} item>
             <Typography>Ahoj jak se mas</Typography>
           </Grid>
-          <Grid item>
-            <IconButton onClick={setDrawer(true)}>
-              <ExpandLessIcon />
-            </IconButton>
-          </Grid>
-        </>
+        </Grid>
       ) : (
-        <>
+        <Grid
+          container
+          alignItems="center"
+          justify="space-evenly"
+          spacing={1}
+          className={classes.drawer}
+        >
           <Grid item>
             <Link href="/">
               <IconButton onClick={setDrawer(false)}>
@@ -67,7 +80,7 @@ const BottomMenu = ({ setDrawer, setState }: any) => {
               </IconButton>
             </Link>
           </Grid>
-        </>
+        </Grid>
       )}
     </>
   );
@@ -82,9 +95,13 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     border: "4px solid #FF96C8",
+    borderColor: theme?.palette.primary.main,
     cursor: "pointer",
     width: theme.spacing(6),
     height: theme.spacing(6),
+  },
+  drawer: {
+    padding: "11px",
   },
 }));
 

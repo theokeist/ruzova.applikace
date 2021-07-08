@@ -97,21 +97,21 @@ function MyApp({ Component, pageProps }: AppProps) {
           <Grid
             container
             item
-            xs={12}
+            xs={11}
             style={{ width: "100%", maxWidth: "100%" }}
           >
             <Component {...pageProps} />
           </Grid>
-          <Divider style={{ width: "100%", height: "5px" }} />
 
           <Grid
             container
             item
             justify="space-evenly"
             alignItems="center"
+            spacing={1}
             style={{
               width: "100vw",
-              height: "60px",
+              height: "auto",
               maxWidth: "100%",
               zIndex: 1000,
               backgroundColor: "white",
@@ -127,7 +127,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             />
           </Grid>
         </Grid>
-        <ReactQueryDevtools initialIsOpen={false} />
+        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
       </QueryClientProvider>
     </ThemeProvider>
   );

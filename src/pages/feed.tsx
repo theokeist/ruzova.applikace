@@ -19,20 +19,24 @@ export default function Feed() {
   //const [posts, setPosts] = useState<any>([]);
 
   const posts = [
-    { id: 1, title: "Ahoj" },
-    { id: 2, title: "Nihao" },
+    {
+      id: 1,
+      title:
+        "AhojAhojAhojAhojAhoj AhojAhoj AhojAhojAhojAhoj. AhojAhoj AhojAhoj. AhojAhoj....",
+    },
+    { id: 2, title: "NihNiha oao Nih a o NihaoNihao? NihaoNihao." },
     { id: 3, title: "Ahoj" },
-    { id: 4, title: "Nihao" },
+    { id: 4, title: "Nihas df sssdfsdf o" },
     { id: 5, title: "Ahoj" },
     { id: 6, title: "Nihao" },
-    { id: 7, title: "Ahoj" },
+    { id: 7, title: "Aho  sdfsdf sdf j" },
     { id: 8, title: "Nihao" },
     { id: 9, title: "Ahoj" },
-    { id: 10, title: "Nihao" },
+    { id: 10, title: "Nsdfsdf sdfsdf sd sdf ssdf sdfihao" },
     { id: 11, title: "Ahoj" },
     { id: 12, title: "Nihao" },
     { id: 13, title: "Ahoj" },
-    { id: 14, title: "Nihao" },
+    { id: 14, title: "Nihasd as asdfs sdfsdfsdfs  sdf sdf ao" },
     { id: 15, title: "Ahoj" },
   ];
   const [loading, setLoading] = useState(true);

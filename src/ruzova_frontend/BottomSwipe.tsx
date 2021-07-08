@@ -31,6 +31,7 @@ const BottomSwipe = ({ toggleDrawer, state, setState }: any) => {
       onOpen={toggleDrawer(true)}
       swipeAreaWidth={25}
       disableDiscovery
+      disableSwipeToOpen
     >
       <div className={classes.content}>
         <Grid
@@ -93,8 +94,8 @@ const BottomSwipe = ({ toggleDrawer, state, setState }: any) => {
 const useStyles = makeStyles((theme) => ({
   root: {
     "& .MuiDrawer-paperAnchorBottom": {
-      borderTopLeftRadius: 25,
-      borderTopRightRadius: 25,
+      borderTopLeftRadius: 0,
+      borderTopRightRadius: 0,
       width: "100%",
     },
   },

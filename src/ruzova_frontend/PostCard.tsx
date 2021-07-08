@@ -58,7 +58,7 @@ const PostCard = ({ postsProps, noStories = false }: any) => {
 
   const profiles = [
     "@xd64cardas",
-    "@vRoman",
+    "@CAman",
     "@RicTicPic",
     "@PicNic420",
     "@ORSZA",
