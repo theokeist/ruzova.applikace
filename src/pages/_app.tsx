@@ -97,7 +97,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <Grid
             container
             item
-            xs={11}
+            xs={12}
             style={{ width: "100%", maxWidth: "100%" }}
           >
             <Component {...pageProps} />
@@ -109,7 +109,6 @@ function MyApp({ Component, pageProps }: AppProps) {
             item
             justify="space-evenly"
             alignItems="center"
-            xs={1}
             style={{
               width: "100vw",
               height: "60px",
