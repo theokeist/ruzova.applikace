@@ -22,6 +22,7 @@ export default function Footer() {
     <Grid
       container
       item
+      xs={1}
       justify="space-evenly"
       alignItems="center"
       spacing={1}

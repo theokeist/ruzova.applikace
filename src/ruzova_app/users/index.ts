@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "react-query"
 import supabase from "../_supabase"
+import { findUserProfile, findProfiles } from "./profiles"
 
 interface User {
   fullName?: string;
@@ -75,28 +76,16 @@ export function useLogin({ email, password }: any) {
   return useMutation('login', () => login({email, password}))
 }
 
-const getUser = async (user: any) => {
-  const { data, error } = await supabase
-    .from('profiles')
-    .select()
-    .eq('id', user?.id)
-    .single()
-
-  if(error) {
-    throw new Error(error.message)
-  }
-
-  if(!data) {
-    throw new Error("User not found")
-  }
-
-  return data
-}
-
 export function useUser() {
   const user = supabase?.auth?.user();
 
-  const data = useQuery('user', () => getUser(user))
+  const data = useQuery('user', () => findUserProfile(user))
+  return data;
+}
+
+export function useProfiles() {
+
+  const data = useQuery('profiles', () => findProfiles())
   return data;
 }
 
