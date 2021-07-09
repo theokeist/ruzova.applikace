@@ -120,20 +120,6 @@ const PostCard = ({ postsProps, noStories = false }: any) => {
             </CardActions>
             <React.Fragment>
               <Collapse in={expanded} timeout="auto" unmountOnExit>
-                <div className={classes.collapse}>
-                  <Link href={`/edit-posts/${post?.id}`}>
-                    <a className="text-sm mr-4 text-blue-500">Edit Post</a>
-                  </Link>
-                  <Link href={`/posts/${post?.id}`}>
-                    <a className="text-sm mr-4 text-blue-500">View Post</a>
-                  </Link>
-                  <button
-                    className="text-sm mr-4 text-red-500"
-                    onClick={() => deletePost(post?.id)}
-                  >
-                    Delete Post
-                  </button>
-                </div>
                 <div className={classes.storiesCollapse}>
                   {!noStories && (
                     <Stories
@@ -173,20 +159,6 @@ const PostCard = ({ postsProps, noStories = false }: any) => {
             </CardActions>
             <React.Fragment>
               <Collapse in={expanded} timeout="auto" unmountOnExit>
-                <div className={classes.collapse}>
-                  <Link href={`/edit-posts/${post?.id}`}>
-                    <a className="text-sm mr-4 text-blue-500">Edit Post</a>
-                  </Link>
-                  <Link href={`/posts/${post?.id}`}>
-                    <a className="text-sm mr-4 text-blue-500">View Post</a>
-                  </Link>
-                  <button
-                    className="text-sm mr-4 text-red-500"
-                    onClick={() => deletePost(post?.id)}
-                  >
-                    Delete Post
-                  </button>
-                </div>
                 {!noStories && (
                   <Stories
                     width="100%"
@@ -268,7 +240,6 @@ const useStyles = makeStyles((theme) => ({
     whiteSpace: "pre-wrap",
     wordBreak: "break-word",
     overflow: "hidden",
-    textAlign: "justify",
     //    whiteSpace: "nowrap",
     //textOverflow: "ellipsis",
   },

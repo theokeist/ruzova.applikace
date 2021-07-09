@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "react-query"
 import supabase from "../_supabase"
-import { findUserProfile, findProfiles } from "./profiles"
+import { findUserProfile, findProfiles, updateProfile } from "./profiles"
 
 interface User {
   fullName?: string;
@@ -78,15 +78,11 @@ export function useLogin({ email, password }: any) {
 
 export function useUser() {
   const user = supabase?.auth?.user();
-
-  const data = useQuery('user', () => findUserProfile(user))
-  return data;
+  return useQuery('user', () => findUserProfile(user))
 }
 
 export function useProfiles() {
-
-  const data = useQuery('profiles', () => findProfiles())
-  return data;
+  return useQuery('profiles', () => findProfiles())
 }
 
 const logout = async () => {
@@ -95,6 +91,17 @@ const logout = async () => {
   if(error) {
     throw error
   }
+}
+
+export function useLivePostUpdate(user: any, live_post: any) {
+  const queryClient = useQueryClient()
+  return useMutation(() => updateProfile(user, live_post), {
+    onSuccess: () => {
+      queryClient.invalidateQueries('profiles')
+      queryClient.invalidateQueries('user')
+
+    }
+  })
 }
 
 export function useLogOut() {

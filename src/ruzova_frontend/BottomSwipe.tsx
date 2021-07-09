@@ -20,37 +20,20 @@ import AvatarProfile from "./Avatar";
 import { useRuzovaTheme } from "./_ruzovaTheme";
 import supabase from "../ruzova_app/_supabase";
 
-const BottomSwipe = ({ user, toggleDrawer, state, setState }: any) => {
+const BottomSwipe = ({
+  user,
+  toggleDrawer,
+  state,
+  setState,
+  livePost,
+  setLivePost,
+}: any) => {
   const classes = useStyles();
   const ruzova = useRuzovaTheme();
-  const [livePost, setLivePost] = React.useState("");
-  async function updateProfile(live_post: any) {
-    try {
-      const updates = {
-        id: user?.data?.id,
-        live_post: live_post,
-        updated_at: new Date(),
-      };
 
-      let { error } = await supabase.from("profiles").update(updates);
-
-      if (error) {
-        throw error;
-      }
-    } catch (error) {
-      console.log(error.message);
-    }
-  }
-
-  const handleLivePost = (event: any) => {
-    const data = event.target.value;
-    updateProfile(data);
+  const handleChange = (e) => {
+    setLivePost(e.target.value);
   };
-
-  React.useEffect(() => {
-    if (!livePost) setLivePost(user?.data?.live_post);
-    updateProfile(livePost);
-  }, [livePost, user]);
 
   return (
     <SwipeableDrawer
@@ -66,20 +49,26 @@ const BottomSwipe = ({ user, toggleDrawer, state, setState }: any) => {
     >
       <div className={classes.content}>
         <Grid container alignItems="flex-start" className={classes.drawer}>
-          {user && user?.data?.avatar_url && (
-            <Grid xs={2} item>
+          <Grid xs={2} item>
+            {user && user?.data?.avatar_url ? (
               <AvatarProfile
                 className={classes.avatar}
                 url={user?.data?.avatar_url}
                 size={30}
               />
-            </Grid>
-          )}
+            ) : (
+              <Avatar
+                alt="Profile"
+                component="div"
+                className={classes.normal}
+              />
+            )}
+          </Grid>
           <Grid xs={10} item>
             <TextField
               className={ruzova.input}
               value={livePost}
-              onChange={(e) => setLivePost(e.target.value)}
+              onChange={handleChange}
               rows={4}
               variant="outlined"
               multiline
@@ -94,25 +83,25 @@ const BottomSwipe = ({ user, toggleDrawer, state, setState }: any) => {
           alignItems="baseline"
           justify="space-around"
         >
-          <Link href="/feed">
-            <IconButton onClick={() => setState(false)}>
+          <IconButton onClick={toggleDrawer(false)}>
+            <Link href="/feed">
               <DynamicFeedIcon />
-            </IconButton>
-          </Link>
-          {user && (
-            <Link href="/profile">
-              <IconButton onClick={() => setState(false)}>
-                <ExpandMoreIcon />
-              </IconButton>
             </Link>
+          </IconButton>
+          {user && (
+            <IconButton onClick={toggleDrawer(false)}>
+              <Link href="/profile">
+                <ExpandMoreIcon />
+              </Link>
+            </IconButton>
           )}
-          <Link href="/profile">
-            <IconButton onClick={() => setState(false)}>
+          <IconButton onClick={toggleDrawer(false)}>
+            <Link href="/profile">
               <Icon>
                 <Image src="/logo.png" layout="fill" />
               </Icon>
-            </IconButton>
-          </Link>
+            </Link>
+          </IconButton>
         </Grid>
 
         <Grid style={{ padding: "11px" }}>
@@ -155,6 +144,10 @@ const useStyles = makeStyles((theme) => ({
   textField: {
     borderTopLeftRadius: 0,
     borderTopRightRadius: 25,
+  },
+  normal: {
+    width: theme.spacing(6),
+    height: theme.spacing(6),
   },
 }));
 

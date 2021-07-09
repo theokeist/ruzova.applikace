@@ -21,7 +21,7 @@ const BottomMenu = ({ user, setDrawer, setState }: any) => {
 
   return (
     <>
-      {user.isSuccess ? (
+      {user ? (
         <Grid
           container
           alignItems="center"
@@ -30,18 +30,25 @@ const BottomMenu = ({ user, setDrawer, setState }: any) => {
           className={classes.drawer}
         >
           <Grid xs={2} onClick={setDrawer(true)} item>
-            {user && user?.data?.avatar_url && (
+            {user && user?.avatar_url ? (
               <AvatarProfile
                 className={classes.avatar}
-                url={user?.data?.avatar_url}
+                url={user?.avatar_url}
                 size={30}
                 stories
+                hideUpload
+              />
+            ) : (
+              <Avatar
+                alt="Profile"
+                component="div"
+                className={classes.normal}
               />
             )}
           </Grid>
           <Grid xs={10} item>
             <Typography className={classes.titleExpanded}>
-              {user?.data?.live_post}
+              {user?.live_post}
             </Typography>
           </Grid>
         </Grid>
@@ -103,6 +110,10 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "justify",
     whiteSpace: "nowrap",
     textOverflow: "ellipsis",
+  },
+  normal: {
+    width: theme.spacing(6),
+    height: theme.spacing(6),
   },
 }));
 

@@ -5,6 +5,7 @@ import { Card, Grid, Typography, CircularProgress } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import PostCard from "../ruzova_frontend/PostCard";
 import PrivateRoute from "../ruzova_frontend/auth/PrivateRoute";
+import { useProfiles } from "../ruzova_app/users";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -18,14 +19,13 @@ export default function Feed() {
   const classes = useStyles();
   const [posts, setPosts] = useState<any>([]);
   const [loading, setLoading] = useState(true);
+
+  const { data: profiles } = useProfiles();
   useEffect(() => {
-    fetchPosts();
-  }, []);
-  async function fetchPosts() {
-    const { data, error } = await supabase.from("profiles").select();
-    setPosts(data);
+    setPosts(profiles);
     setLoading(false);
-  }
+  }, [profiles]);
+
   if (loading)
     return (
       <Grid
