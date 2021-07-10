@@ -18,7 +18,7 @@ import { useUser } from "../ruzova_app/users";
 import AvatarProfile from "./Avatar";
 import { useRuzovaTheme } from "./_ruzovaTheme";
 import supabase from "../ruzova_app/_supabase";
-
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 const BottomSwipe = ({
   user,
   toggleDrawer,
@@ -90,7 +90,7 @@ const BottomSwipe = ({
           {user && (
             <IconButton onClick={toggleDrawer(false)}>
               <Link href="/profile">
-                <ExpandMoreIcon />
+                <AccountCircleIcon />
               </Link>
             </IconButton>
           )}

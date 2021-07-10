@@ -131,6 +131,7 @@ export default function Profile() {
 
         <TextField
           variant="outlined"
+          size="small"
           className={`${ruzova.input} ${classes.textField}`}
           id="email"
           type="text"
@@ -141,6 +142,7 @@ export default function Profile() {
         />
         <TextField
           variant="outlined"
+          size="small"
           className={`${ruzova.input} ${classes.textField}`}
           id="username"
           type="text"
@@ -151,6 +153,7 @@ export default function Profile() {
         />
         <TextField
           variant="outlined"
+          size="small"
           className={`${ruzova.input} ${classes.textField}`}
           id="website"
           type="website"
@@ -160,7 +163,12 @@ export default function Profile() {
           fullWidth
         />
 
-        <Button color="primary" fullWidth onClick={updateProfileHandler}>
+        <Button
+          color="primary"
+          fullWidth
+          className={`${ruzova.input} ${classes.button}`}
+          onClick={updateProfileHandler}
+        >
           Aktualizovat
         </Button>
 
@@ -168,6 +176,7 @@ export default function Profile() {
           variant="outlined"
           color="secondary"
           fullWidth
+          className={`${ruzova.input} ${classes.button}`}
           onClick={() => logoutMutation.mutate()}
         >
           Odhlásit se
