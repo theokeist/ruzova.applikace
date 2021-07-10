@@ -1,7 +1,6 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Grid,
@@ -24,7 +23,6 @@ const BottomSwipe = ({
   user,
   toggleDrawer,
   state,
-  setState,
   livePost,
   setLivePost,
 }: any) => {
@@ -50,11 +48,12 @@ const BottomSwipe = ({
       <div className={classes.content}>
         <Grid container alignItems="flex-start" className={classes.drawer}>
           <Grid xs={2} item>
-            {user && user?.data?.avatar_url ? (
+            {user && user?.avatar_url ? (
               <AvatarProfile
                 className={classes.avatar}
-                url={user?.data?.avatar_url}
+                url={user?.avatar_url}
                 size={30}
+                hideUpload
               />
             ) : (
               <Avatar

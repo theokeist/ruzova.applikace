@@ -144,13 +144,7 @@ const AvatarProfile = ({
                 disabled={uploading}
               />
             }
-            label={
-              uploading ? (
-                "Uploading ..."
-              ) : (
-                <Button variant="outlined">Upload</Button>
-              )
-            }
+            label={uploading ? "Uploading ..." : "Upload"}
           />
         </FormControl>
       ) : (
