@@ -29,7 +29,7 @@ const BottomSwipe = ({
   const classes = useStyles();
   const ruzova = useRuzovaTheme();
 
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     setLivePost(e.target.value);
   };
 
