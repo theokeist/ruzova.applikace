@@ -165,8 +165,9 @@ export default function Profile() {
 
         <Button
           color="primary"
+          variant="contained"
           fullWidth
-          className={`${ruzova.input} ${classes.button}`}
+          className={`${ruzova.button} ${classes.button}`}
           onClick={updateProfileHandler}
         >
           Aktualizovat
@@ -176,7 +177,7 @@ export default function Profile() {
           variant="outlined"
           color="secondary"
           fullWidth
-          className={`${ruzova.input} ${classes.button}`}
+          className={`${ruzova.button} ${classes.button}`}
           onClick={() => logoutMutation.mutate()}
         >
           Odhlásit se
