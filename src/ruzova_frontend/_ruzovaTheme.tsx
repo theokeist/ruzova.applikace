@@ -10,7 +10,7 @@ export const useRuzovaTheme = makeStyles((theme) => ({
   },
   button: {
     textTransform: "none",
-    borderRadius: "15px",
-    borderTopLeftRadius: "0px",
+    borderRadius: "15px !important",
+    borderTopLeftRadius: "0px !important",
   },
 }));
