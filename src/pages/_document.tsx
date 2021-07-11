@@ -7,7 +7,6 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <meta name="viewport" content="initial-scale=1, viewport-fit=cover" />
           <link rel="manifest" href="/manifest.json" />
           <link href="/logo.png" rel="icon" type="image/png" sizes="16x16" />
           <link

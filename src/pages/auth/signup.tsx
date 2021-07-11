@@ -23,17 +23,16 @@ export default function Signup() {
 
   if (createUserMutation?.isSuccess) {
     router.push("/");
-  } else {
-    createUserMutation?.isError && (
-      <p className="text-sm mb-8 text-red-500">
-        {createUserMutation?.error?.message}
-      </p>
-    );
   }
 
   return (
     <Grid container item justify="center" alignItems="center">
       <Grid container xs={10} justify="center" item>
+        {createUserMutation?.isError && (
+          <p className="text-sm mb-8 text-red-500">
+            {createUserMutation?.error?.message}
+          </p>
+        )}
         <div className={classes.logo}>
           <Image src="/logo.png" height={100} width={100} />
         </div>
@@ -60,8 +59,11 @@ export default function Signup() {
         />
 
         <TextField
+          error
+          helperText="Incorrect entry."
           variant="outlined"
           label="Uživatelské jméno"
+          defaultValue="Hello World"
           name="username"
           type="text"
           size="small"
@@ -71,6 +73,7 @@ export default function Signup() {
         />
 
         <Button
+          type="submit"
           variant="contained"
           fullWidth
           color="primary"

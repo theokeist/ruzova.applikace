@@ -50,11 +50,7 @@ export default function Feed() {
         </Typography>
         {posts.map((post: any, index: any) => (
           <Link key={post.id} href={`/posts/${post.id}`}>
-            {index % 7 === 0 ? (
-              <PostCard key={post.id} postsProps={post} noStories></PostCard>
-            ) : (
-              <PostCard key={post.id} postsProps={post}></PostCard>
-            )}
+            <PostCard key={index} postsProps={post}></PostCard>
           </Link>
         ))}
       </Grid>

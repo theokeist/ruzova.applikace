@@ -9,14 +9,11 @@ import {
   Divider,
   IconButton,
 } from "@material-ui/core";
-import ExpandLessIcon from "@material-ui/icons/ExpandLess";
-import AddIcon from "@material-ui/icons/Add";
-import { useUser } from "../ruzova_app/users";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 import LockIcon from "@material-ui/icons/Lock";
 import HomeIcon from "@material-ui/icons/Home";
 import AvatarProfile from "./Avatar";
-const BottomMenu = ({ user, setDrawer, setState }: any) => {
+const BottomMenu = ({ url, user, setDrawer, setState }: any) => {
   const classes = useStyles();
 
   return (
@@ -30,10 +27,10 @@ const BottomMenu = ({ user, setDrawer, setState }: any) => {
           className={classes.drawer}
         >
           <Grid xs={2} onClick={setDrawer(true)} item>
-            {user && user?.avatar_url ? (
+            {user && url ? (
               <AvatarProfile
                 className={classes.avatar}
-                url={user?.avatar_url}
+                url={url}
                 size={30}
                 stories
                 hideUpload

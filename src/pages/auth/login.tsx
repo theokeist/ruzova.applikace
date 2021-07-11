@@ -2,7 +2,13 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import { useLogin } from "../../ruzova_app/users";
-import { Grid, Button, TextField, CircularProgress } from "@material-ui/core";
+import {
+  Grid,
+  Button,
+  TextField,
+  CircularProgress,
+  FormControl,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useRuzovaTheme } from "../../ruzova_frontend/_ruzovaTheme";
 
@@ -19,17 +25,15 @@ export default function Login() {
     router.push("/feed");
   }
 
-  {
-    loginMutation?.isError && (
-      <p className="text-sm mb-8 text-red-500">
-        {loginMutation?.error?.message}
-      </p>
-    );
-  }
-
   return (
     <Grid container item justify="center" alignItems="center">
       <Grid container xs={10} justify="center" item>
+        {loginMutation?.isError && (
+          <p className="text-sm mb-8 text-red-500">
+            {loginMutation?.error?.message}
+          </p>
+        )}
+
         <div className={classes.logo}>
           <Image src="/logo.png" height={100} width={100} />
         </div>
@@ -56,6 +60,7 @@ export default function Login() {
         />
 
         <Button
+          type="submit"
           variant="contained"
           fullWidth
           color="primary"

@@ -54,6 +54,10 @@ function MyApp({ Component, pageProps }: AppProps) {
       <QueryClientProvider client={queryClient}>
         <CssBaseline />
         <Head>
+          <meta
+            name="viewport"
+            content="initial-scale=1, viewport-fit=contain"
+          />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link

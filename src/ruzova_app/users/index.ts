@@ -78,7 +78,7 @@ export function useLogin({ email, password }: any) {
 
 
 export function useProfileImage(path:any) {
-  return useQuery('userImage', () => downloadImage(path))
+  return useQuery(['userImage', {path}], () => downloadImage(path))
 }
 
 export function useUser() {

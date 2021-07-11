@@ -7,7 +7,6 @@ import {
   makeStyles,
   CardActions,
   Collapse,
-  Avatar,
 } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
@@ -15,6 +14,8 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Stories from "react-insta-stories";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import Image from "next/image";
+import AvatarProfile from "./Avatar";
+import { useProfileImage } from "../ruzova_app/users";
 
 const stories: any = [
   "https://images.unsplash.com/photo-1622495806758-5d8f62817275?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=363&q=80",
@@ -42,10 +43,16 @@ const PostCard = ({ postsProps, noStories = false }: any) => {
       setExpanded(!expanded);
     }
   };
+
+  const { data: url_live } = useProfileImage(postsProps?.avatar_url);
+
   const [post, setPosts] = useState<any>();
+  const [url, setUrl] = useState<any>();
+
   useEffect(() => {
     setPosts(postsProps);
-  }, [postsProps]);
+    setUrl(url_live);
+  }, [postsProps, url_live]);
 
   const deletePost = async (id: any) => {
     return;
@@ -77,8 +84,8 @@ const PostCard = ({ postsProps, noStories = false }: any) => {
   const randomProfiles = profiles[Math.floor(Math.random() * profiles.length)];
   const [randomProfile, setRandomProfile] = useState(randomProfiles);
   const randomAvatars = avatars[Math.floor(Math.random() * avatars.length)];
-  const [randomAvatar, setRandomAvatar] = useState(randomAvatars);
 
+  console.log(post);
   return (
     <Grid
       direction="row"
@@ -88,11 +95,7 @@ const PostCard = ({ postsProps, noStories = false }: any) => {
       container
     >
       <Grid className={classes.avatarSide}>
-        <Avatar
-          className={!noStories ? classes.avatarStories : classes.avatar}
-          onClick={handleStories}
-          src={randomAvatar}
-        ></Avatar>
+        <AvatarProfile url={url} size={40} hideUpload />
       </Grid>
 
       <Grid className={classes.cardSide}>

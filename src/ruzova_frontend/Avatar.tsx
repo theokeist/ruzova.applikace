@@ -8,9 +8,10 @@ import {
   FormControlLabel,
   Typography,
   TextField,
+  IconButton,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { useProfileImage } from "../ruzova_app/users";
+import PhotoCamera from "@material-ui/icons/PhotoCamera";
 
 const useStyles = makeStyles((theme) => ({
   large: {
@@ -54,14 +55,14 @@ const AvatarProfile = ({
   stories = false,
 }: any) => {
   const classes = useStyles();
-  const [avatarUrl, setAvatarUrl] = useState<any>(null);
+  // const [avatarUrl, setAvatarUrl] = useState<any>(null);
   const [uploading, setUploading] = useState<any>(false);
 
-  const { data: url_live } = useProfileImage(url);
-  useEffect(() => {
-    if (url_live) setAvatarUrl(url_live);
-  }, [url_live]);
+  // useEffect(() => {
+  //   if (url_live) setAvatarUrl(url_live);
+  // }, [url_live]);
 
+  // console.log(avatarUrl);
   // async function downloadImage(path: string) {
   //   try {
   //     const { data, error } = await supabase.storage
@@ -108,10 +109,10 @@ const AvatarProfile = ({
 
   return (
     <Grid container item justify="space-evenly" alignItems="center">
-      {avatarUrl && stories ? (
+      {url && stories ? (
         <>
           <Avatar
-            src={avatarUrl}
+            src={url}
             alt="Avatar"
             component="div"
             className={
@@ -123,32 +124,34 @@ const AvatarProfile = ({
         </>
       ) : (
         <Avatar
-          src={avatarUrl}
+          src={url}
           alt="Avatar"
           component="div"
           className={largeAvatar ? classes.large : classes.normal}
         />
       )}
       {!hideUpload ? (
-        <FormControl component="form">
-          <FormControlLabel
-            control={
-              <input
-                style={{
-                  visibility: "hidden",
-                  position: "absolute",
-                  width: "10px",
-                }}
-                type="file"
-                id="single"
-                accept="image/*"
-                onChange={uploadAvatar}
-                disabled={uploading}
-              />
-            }
-            label={uploading ? "Uploading ..." : "Upload"}
+        <>
+          <input
+            id="icon-button-file"
+            style={{
+              display: "none",
+            }}
+            type="file"
+            accept="image/*"
+            onChange={uploadAvatar}
+            disabled={uploading}
           />
-        </FormControl>
+          <label htmlFor="icon-button-file">
+            <IconButton
+              color="secondary"
+              aria-label="upload picture"
+              component="span"
+            >
+              <PhotoCamera />
+            </IconButton>
+          </label>
+        </>
       ) : (
         <></>
       )}

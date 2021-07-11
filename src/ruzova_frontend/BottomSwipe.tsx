@@ -12,14 +12,12 @@ import {
   Icon,
   TextField,
 } from "@material-ui/core";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import DynamicFeedIcon from "@material-ui/icons/DynamicFeed";
-import { useUser } from "../ruzova_app/users";
 import AvatarProfile from "./Avatar";
 import { useRuzovaTheme } from "./_ruzovaTheme";
-import supabase from "../ruzova_app/_supabase";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 const BottomSwipe = ({
+  url,
   user,
   toggleDrawer,
   state,
@@ -51,7 +49,7 @@ const BottomSwipe = ({
             {user && user?.avatar_url ? (
               <AvatarProfile
                 className={classes.avatar}
-                url={user?.avatar_url}
+                url={url}
                 size={30}
                 hideUpload
               />

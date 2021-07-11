@@ -2,14 +2,19 @@ import React, { useState } from "react";
 import { Grid } from "@material-ui/core";
 import BottomMenu from "./BottomMenu";
 import BottomSwipe from "./BottomSwipe";
-import { useUser, useLivePostUpdate } from "../ruzova_app/users";
+import {
+  useUser,
+  useLivePostUpdate,
+  useProfileImage,
+} from "../ruzova_app/users";
 
 import supabase from "../ruzova_app/_supabase";
 
 export default function Footer() {
   const [state, setState] = useState(false);
   const [users, setUsers] = useState<any>();
-  const [livePost, setLivePost] = useState("");
+  const [livePost, setLivePost] = useState<any>("");
+  const [url, setUrl] = useState<any>("");
 
   const { data: user } = useUser();
 
@@ -17,6 +22,12 @@ export default function Footer() {
     setUsers(user);
     setLivePost(user?.live_post);
   }, [user]);
+
+  const { data: url_live } = useProfileImage(users?.avatar_url);
+
+  React.useEffect(() => {
+    setUrl(url_live);
+  }, [url_live]);
   const toggleDrawer = (open: any) => (event: any) => {
     if (
       event &&
@@ -71,8 +82,9 @@ export default function Footer() {
         bottom: "0px",
       }}
     >
-      <BottomMenu user={users} setDrawer={toggleDrawer}></BottomMenu>
+      <BottomMenu user={users} url={url} setDrawer={toggleDrawer}></BottomMenu>
       <BottomSwipe
+        url={url}
         user={users}
         toggleDrawer={toggleDrawer}
         state={state}

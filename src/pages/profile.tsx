@@ -4,7 +4,7 @@ import { Button, Grid, Typography, CircularProgress } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { TextField } from "@material-ui/core";
 import PrivateRoute from "../ruzova_frontend/auth/PrivateRoute";
-import { useLogOut, useUser } from "../ruzova_app/users";
+import { useLogOut, useProfileImage, useUser } from "../ruzova_app/users";
 import Avatar from "../ruzova_frontend/Avatar";
 import { useRuzovaTheme } from "../ruzova_frontend/_ruzovaTheme";
 import RuzovaButton from "../ruzova_frontend/RuzovaButton";
@@ -40,6 +40,7 @@ export default function Profile() {
   const [website, setWebsite] = useState<any>(null);
   const [avatar_url, setAvatarUrl] = useState<any>(null);
   const [live_post, setLivePost] = useState<any>(null);
+  const [url, setUrl] = useState<any>();
 
   const logoutMutation = useLogOut();
 
@@ -48,6 +49,14 @@ export default function Profile() {
     console.log(user);
     getProfile(user);
   }, [user]);
+
+  const { data: url_live } = useProfileImage(avatar_url);
+  //
+  // Getting Profile images
+  //
+  useEffect(() => {
+    setUrl(url_live);
+  }, [url_live]);
 
   async function getProfile(user: any) {
     try {
@@ -119,7 +128,7 @@ export default function Profile() {
           className={classes?.avatarContainer}
         >
           <Avatar
-            url={avatar_url}
+            url={url}
             size={40}
             largeAvatar={true}
             username={username}
