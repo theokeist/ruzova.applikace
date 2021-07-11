@@ -95,7 +95,7 @@ const BottomSwipe = ({
             </IconButton>
           )}
           <IconButton onClick={toggleDrawer(false)}>
-            <Link href="/profile">
+            <Link href="/settings">
               <Icon>
                 <Image src="/logo.png" layout="fill" />
               </Icon>

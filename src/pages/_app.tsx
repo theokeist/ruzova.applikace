@@ -78,7 +78,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
           <Footer />
         </Grid>
-        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </ThemeProvider>
   );

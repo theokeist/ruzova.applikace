@@ -10,11 +10,12 @@ import {
   TextField,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { useProfileImage } from "../ruzova_app/users";
 
 const useStyles = makeStyles((theme) => ({
   large: {
-    width: theme.spacing(15),
-    height: theme.spacing(15),
+    width: theme.spacing(18),
+    height: theme.spacing(18),
   },
   normal: {
     width: theme.spacing(6),
@@ -56,24 +57,25 @@ const AvatarProfile = ({
   const [avatarUrl, setAvatarUrl] = useState<any>(null);
   const [uploading, setUploading] = useState<any>(false);
 
+  const { data: url_live } = useProfileImage(url);
   useEffect(() => {
-    if (url) downloadImage(url);
-  }, [url]);
+    if (url_live) setAvatarUrl(url_live);
+  }, [url_live]);
 
-  async function downloadImage(path: string) {
-    try {
-      const { data, error } = await supabase.storage
-        .from("avatars")
-        .download(path);
-      if (error) {
-        throw error;
-      }
-      const url = URL.createObjectURL(data);
-      setAvatarUrl(url);
-    } catch (error) {
-      console.log("Error downloading image: ", error.message);
-    }
-  }
+  // async function downloadImage(path: string) {
+  //   try {
+  //     const { data, error } = await supabase.storage
+  //       .from("avatars")
+  //       .download(path);
+  //     if (error) {
+  //       throw error;
+  //     }
+  //     const url = URL.createObjectURL(data);
+  //     setAvatarUrl(url);
+  //   } catch (error) {
+  //     console.log("Error downloading image: ", error.message);
+  //   }
+  // }
 
   async function uploadAvatar(event: any) {
     try {
@@ -105,7 +107,7 @@ const AvatarProfile = ({
   }
 
   return (
-    <>
+    <Grid container item justify="space-evenly" alignItems="center">
       {avatarUrl && stories ? (
         <>
           <Avatar
@@ -150,7 +152,7 @@ const AvatarProfile = ({
       ) : (
         <></>
       )}
-    </>
+    </Grid>
   );
 };
 

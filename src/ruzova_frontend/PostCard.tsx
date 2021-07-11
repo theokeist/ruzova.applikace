@@ -240,8 +240,7 @@ const useStyles = makeStyles((theme) => ({
     whiteSpace: "pre-wrap",
     wordBreak: "break-word",
     overflow: "hidden",
-    fontSize: 15,
-    lineHeight: 1.175,
+    lineHeight: 1.25,
     //    whiteSpace: "nowrap",
     //textOverflow: "ellipsis",
   },
@@ -251,8 +250,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "justify",
     whiteSpace: "nowrap",
     textOverflow: "ellipsis",
-    lineHeight: 1.175,
-    fontSize: 15,
+    lineHeight: 1.25,
   },
 }));
 

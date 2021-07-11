@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "react-query"
 import supabase from "../_supabase"
-import { findUserProfile, findProfiles, updateProfile } from "./profiles"
+import { findUserProfile, findProfiles, updateProfile, downloadImage } from "./profiles"
 
 interface User {
   fullName?: string;
@@ -74,6 +74,11 @@ const login = async ({email, password}: any) => {
 
 export function useLogin({ email, password }: any) {
   return useMutation('login', () => login({email, password}))
+}
+
+
+export function useProfileImage(path:any) {
+  return useQuery('userImage', () => downloadImage(path))
 }
 
 export function useUser() {

@@ -1,5 +1,22 @@
 import supabase from "../_supabase"
 import { useQueryClient } from "react-query"
+
+
+export async function downloadImage(path: string) {
+  try {
+    const { data, error } = await supabase.storage
+      .from("avatars")
+      .download(path);
+    if (error) {
+      throw error;
+    }
+    const url = URL.createObjectURL(data);
+    return url;
+  } catch (error) {
+    console.log("Error downloading image: ", error.message);
+  }
+}
+
 export const findUserProfile = async (user: any) => {
   const { data, error } = await supabase
     .from('profiles')

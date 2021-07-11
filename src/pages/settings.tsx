@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
       fontWeight: 900,
     },
     ONE: {
-      padding: theme?.spacing(2),
+      padding: theme?.spacing(4),
       marginBottom: theme?.spacing(10),
     },
     textField: {
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function Profile() {
+export default function Settings() {
   const ruzova = useRuzovaTheme();
 
   const classes = useStyles();
@@ -39,7 +39,7 @@ export default function Profile() {
   const [username, setUsername] = useState<any>(null);
   const [website, setWebsite] = useState<any>(null);
   const [avatar_url, setAvatarUrl] = useState<any>(null);
-  const [live_post, setLivePost] = useState<any>(null);
+  const [session, setSession] = useState<any>(null);
 
   const logoutMutation = useLogOut();
 
@@ -55,7 +55,7 @@ export default function Profile() {
 
       let { data, error, status } = await supabase
         .from("profiles")
-        .select(`username, website, live_post, avatar_url`)
+        .select(`username, website, avatar_url`)
         .eq("id", user?.id)
         .single();
 
@@ -68,7 +68,6 @@ export default function Profile() {
         setUsername(data.username);
         setWebsite(data.website);
         setAvatarUrl(data.avatar_url);
-        setLivePost(data.live_post);
       }
     } catch (error) {
       console.log(error?.message);
@@ -121,9 +120,7 @@ export default function Profile() {
           <Avatar
             url={avatar_url}
             size={40}
-            largeAvatar={true}
             username={username}
-            hideUpload
             onUpload={(url: any) => {
               setAvatarUrl(url);
               updateProfile({ username, website, avatar_url: url });
@@ -131,21 +128,59 @@ export default function Profile() {
           />
         </Grid>
 
-        <Grid container item direction="column" justify="flex-start">
-          <Typography variant="h4" style={{ fontWeight: "bold" }}>
-            {username}
-          </Typography>
+        <TextField
+          variant="outlined"
+          size="small"
+          className={`${ruzova.input} ${classes.textField}`}
+          id="email"
+          type="text"
+          label="Email"
+          value={session?.user?.email}
+          disabled
+          fullWidth
+        />
+        <TextField
+          variant="outlined"
+          size="small"
+          className={`${ruzova.input} ${classes.textField}`}
+          id="username"
+          type="text"
+          label="Uživatelské jméno"
+          value={username || ""}
+          onChange={(e) => setUsername(e.target.value)}
+          fullWidth
+        />
+        <TextField
+          variant="outlined"
+          size="small"
+          className={`${ruzova.input} ${classes.textField}`}
+          id="website"
+          type="website"
+          label="Web"
+          value={website || ""}
+          onChange={(e) => setWebsite(e?.target?.value)}
+          fullWidth
+        />
 
-          <Typography
-            variant="subtitle1"
-            style={{ fontWeight: "bold", alignSelf: "flex-start" }}
-            gutterBottom
-          >
-            Prestiž : 782
-          </Typography>
-        </Grid>
+        <Button
+          color="primary"
+          variant="contained"
+          fullWidth
+          className={`${ruzova.button} ${classes.button}`}
+          onClick={updateProfileHandler}
+        >
+          Aktualizovat
+        </Button>
 
-        <Typography style={{ marginTop: "20px" }}>{live_post}</Typography>
+        <Button
+          variant="outlined"
+          color="secondary"
+          fullWidth
+          className={`${ruzova.button} ${classes.button}`}
+          onClick={() => logoutMutation.mutate()}
+        >
+          Odhlásit se
+        </Button>
       </Grid>
     </PrivateRoute>
   );
