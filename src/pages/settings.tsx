@@ -4,10 +4,16 @@ import { Button, Grid, Typography, CircularProgress } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { TextField } from "@material-ui/core";
 import PrivateRoute from "../ruzova_frontend/auth/PrivateRoute";
-import { useLogOut, useProfileImage, useUser } from "../ruzova_app/users";
+import {
+  useLogOut,
+  useProfileImage,
+  useSettingsUpdate,
+  useUser,
+} from "../ruzova_app/users";
 import AvatarProfile from "../ruzova_frontend/Avatar";
 import { useRuzovaTheme } from "../ruzova_frontend/_ruzovaTheme";
 import RuzovaButton from "../ruzova_frontend/RuzovaButton";
+import { useQueryClient } from "react-query";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -84,36 +90,12 @@ export default function Settings() {
     }
   }
 
-  async function updateProfile({ username, website, avatar_url }: any) {
-    try {
-      setLoading(true);
-      const user = supabase.auth.user();
+  const { mutate: settingsUpdate } = useSettingsUpdate();
 
-      const updates = {
-        id: user?.id,
-        username,
-        website,
-        avatar_url,
-        updated_at: new Date(),
-      };
-
-      let { error } = await supabase.from("profiles").upsert(updates, {
-        returning: "minimal", // Don't return the value after inserting
-      });
-
-      if (error) {
-        throw error;
-      }
-    } catch (error) {
-      alert(error.message);
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  const updateProfileHandler = () => {
-    updateProfile({ username, website, avatar_url });
+  const updateProfileHandler = ({ user, username, website, avatar_url }) => {
+    settingsUpdate({ user, username, website, avatar_url });
   };
+
   return (
     <PrivateRoute>
       <Grid container justify="center" className={classes?.ONE}>
@@ -131,7 +113,12 @@ export default function Settings() {
             username={username}
             onUpload={(url: any) => {
               setAvatarUrl(url);
-              updateProfile({ username, website, avatar_url: url });
+              updateProfileHandler({
+                user,
+                username,
+                website,
+                avatar_url: url,
+              });
             }}
           />
         </Grid>
@@ -176,7 +163,14 @@ export default function Settings() {
           size="small"
           color="primary"
           className={`${ruzova.button} ${classes.button}`}
-          onClick={updateProfileHandler}
+          onClick={() =>
+            updateProfileHandler({
+              user,
+              username,
+              website,
+              avatar_url,
+            })
+          }
         >
           Aktualizovat
         </Button>

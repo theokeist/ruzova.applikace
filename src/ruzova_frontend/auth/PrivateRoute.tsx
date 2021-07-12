@@ -16,7 +16,7 @@ export default function PrivateRoute({ children }: any) {
           height: "585px",
         }}
       >
-        <CircularProgress />;
+        <CircularProgress />
       </Grid>
     );
   }
@@ -33,7 +33,7 @@ export default function PrivateRoute({ children }: any) {
           height: "585px",
         }}
       >
-        <CircularProgress />;
+        <CircularProgress />
       </Grid>
     );
   }

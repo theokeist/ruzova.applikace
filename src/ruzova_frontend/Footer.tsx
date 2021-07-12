@@ -55,7 +55,9 @@ export default function Footer() {
         updated_at: new Date(),
       };
 
-      let { error } = await supabase.from("profiles").update(updates);
+      let { error } = await supabase
+        .from("profiles")
+        .upsert(updates, { returning: "minimal" });
 
       if (error) {
         throw error;

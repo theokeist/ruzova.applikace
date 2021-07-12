@@ -73,3 +73,24 @@ export const updateProfile = async (user: any, live_post: any) => {
     console.log(error.message);
   }
 }
+
+export async function updateSettings(settings: any) {
+  try {
+    const updates = {
+      id: settings?.user?.id,
+      username: settings?.username,
+      website: settings?.website,
+      avatar_url: settings?.avatar_url,
+      updated_at: new Date(),
+    };
+
+    let { error } = await supabase.from("profiles").upsert(updates, {returning: "minimal"});
+
+    if (error) {
+      throw error;
+    }
+
+  } catch (error) {
+    alert(error.message);
+  } 
+}

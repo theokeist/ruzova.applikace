@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "react-query"
 import supabase from "../_supabase"
-import { findUserProfile, findProfiles, updateProfile, downloadImage } from "./profiles"
+import { findUserProfile, findProfiles, updateProfile, downloadImage ,updateSettings} from "./profiles"
 
 interface User {
   fullName?: string;
@@ -98,13 +98,24 @@ const logout = async () => {
   }
 }
 
+export function useSettingsUpdate(options = {}) {
+  const queryClient = useQueryClient();
+  return useMutation<any, any, any>(settings => updateSettings(settings), {
+    onSuccess: () => {
+      queryClient.invalidateQueries('profiles')
+      queryClient.invalidateQueries("userImage");
+      queryClient.invalidateQueries("user"); 
+    },
+    ...options
+  });
+}
+
 export function useLivePostUpdate(user: any, live_post: any) {
   const queryClient = useQueryClient()
   return useMutation(() => updateProfile(user, live_post), {
     onSuccess: () => {
       queryClient.invalidateQueries('profiles')
       queryClient.invalidateQueries('user')
-
     }
   })
 }
