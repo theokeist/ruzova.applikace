@@ -2,10 +2,10 @@ import { useRouter } from "next/router";
 import { useUser } from "../../ruzova_app/users";
 import { Grid, CircularProgress } from "@material-ui/core";
 
-export default function PrivateRoute({ children }: any) {
+export default function PrivateRoute({ isLoading, children }: any) {
   const router = useRouter();
   const { isFetching, isError } = useUser();
-  if (isFetching) {
+  if (isFetching || isLoading) {
     return (
       <Grid
         style={{

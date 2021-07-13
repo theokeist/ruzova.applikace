@@ -19,7 +19,7 @@ export default function Feed() {
   const [profiles, setProfiles] = useState<any>([]);
   const [loading, setLoading] = useState(true);
 
-  const { data: profilesResponse } = useProfiles();
+  const { data: profilesResponse, isLoading } = useProfiles();
   useEffect(() => {
     setProfiles(profilesResponse);
     setLoading(false);
@@ -43,7 +43,7 @@ export default function Feed() {
     return <Typography variant="h3">No posts :-/</Typography>;
 
   return (
-    <PrivateRoute>
+    <PrivateRoute isLoading={isLoading}>
       <Grid style={{ width: "100%", marginBottom: "70px" }} item>
         <Typography variant="h4" className={classes.feeds} gutterBottom>
           Feed
