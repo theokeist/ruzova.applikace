@@ -49,7 +49,7 @@ export default function Settings() {
   const [url, setUrl] = useState<any>();
   const logoutMutation = useLogOut();
 
-  const { data: user } = useUser();
+  const { data: user, isLoading } = useUser();
   useEffect(() => {
     setUsername(user?.username);
     setWebsite(user?.website);
@@ -95,7 +95,7 @@ export default function Settings() {
   };
 
   return (
-    <PrivateRoute>
+    <PrivateRoute isLoading={isLoading}>
       <Grid container justify="center" className={classes?.ONE}>
         <Grid
           container

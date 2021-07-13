@@ -40,7 +40,7 @@ export default function Profile() {
   const [avatar_url, setAvatarUrl] = useState<any>(null);
   const [live_post, setLivePost] = useState<any>(null);
 
-  const { data: user } = useUser();
+  const { data: user, isLoading } = useUser();
   useEffect(() => {
     setUsername(user?.username);
     setWebsite(user?.website);
@@ -49,7 +49,7 @@ export default function Profile() {
   }, [user]);
 
   return (
-    <PrivateRoute>
+    <PrivateRoute isLoading={isLoading}>
       <Grid container justify="center" className={classes?.ONE}>
         <Grid
           container
