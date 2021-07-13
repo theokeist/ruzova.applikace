@@ -51,54 +51,42 @@ export default function Settings() {
 
   const { data: user } = useUser();
   useEffect(() => {
-    console.log(user);
-    getProfile(user);
+    setUsername(user?.username);
+    setWebsite(user?.website);
+    setAvatarUrl(user?.avatar_url);
   }, [user]);
 
-  const { data: url_live } = useProfileImage(avatar_url);
-  //
-  // Getting Profile images
-  //
-  useEffect(() => {
-    setUrl(url_live);
-  }, [url_live]);
+  // async function getProfile(user: any) {
+  //   try {
+  //     setLoading(true);
 
-  async function getProfile(user: any) {
-    try {
-      setLoading(true);
+  //     let { data, error, status } = await supabase
+  //       .from("profiles")
+  //       .select(`username, website, avatar_url`)
+  //       .eq("id", user?.id)
+  //       .single();
 
-      let { data, error, status } = await supabase
-        .from("profiles")
-        .select(`username, website, avatar_url`)
-        .eq("id", user?.id)
-        .single();
+  //     if (error && status !== 406) {
+  //       throw error;
+  //     }
 
-      if (error && status !== 406) {
-        throw error;
-      }
-
-      if (data) {
-        console.log(data);
-        setUsername(data.username);
-        setWebsite(data.website);
-        setAvatarUrl(data.avatar_url);
-      }
-    } catch (error) {
-      console.log(error?.message);
-    } finally {
-      setLoading(false);
-    }
-  }
+  //     if (data) {
+  //       console.log(data);
+  //       setUsername(data.username);
+  //       setWebsite(data.website);
+  //       setAvatarUrl(data.avatar_url);
+  //     }
+  //   } catch (error) {
+  //     console.log(error?.message);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // }
 
   const { mutate: settingsUpdate } = useSettingsUpdate();
 
-  const updateProfileHandler = ({
-    user,
-    username,
-    website,
-    avatar_url,
-  }: any) => {
-    settingsUpdate({ user, username, website, avatar_url });
+  const updateProfileHandler = (user, username, website, url) => {
+    settingsUpdate({ user, username, website, avatar_url: url });
   };
 
   return (
@@ -113,17 +101,12 @@ export default function Settings() {
           className={classes?.avatarContainer}
         >
           <AvatarProfile
-            url={url}
+            url={avatar_url}
             size={40}
             username={username}
             onUpload={(url: any) => {
               setAvatarUrl(url);
-              updateProfileHandler({
-                user,
-                username,
-                website,
-                avatar_url: url,
-              });
+              updateProfileHandler(user, username, website, url);
             }}
           />
         </Grid>
@@ -169,12 +152,7 @@ export default function Settings() {
           color="primary"
           className={`${ruzova.button} ${classes.button}`}
           onClick={() =>
-            updateProfileHandler({
-              user,
-              username,
-              website,
-              avatar_url,
-            })
+            updateProfileHandler(user, username, website, avatar_url)
           }
         >
           Aktualizovat

@@ -32,7 +32,8 @@ export const findUserProfile = async (user: any) => {
     throw new Error("User not found")
   }
 
-  return data
+  const trueImage = await downloadImage(data?.avatar_url);
+  return {...data, trueImage}
 }
 
 export const findProfiles = async () => {
@@ -52,7 +53,6 @@ export const findProfiles = async () => {
 }
 
 export const updateProfile = async (user: any, live_post: any) => {
-  try {
     const queryClient = useQueryClient()
 
     const updates = {
@@ -69,13 +69,9 @@ export const updateProfile = async (user: any, live_post: any) => {
 
     queryClient.invalidateQueries('profiles')
     queryClient.invalidateQueries('user')
-  } catch (error) {
-    console.log(error.message);
-  }
 }
 
 export async function updateSettings(settings: any) {
-  try {
     const updates = {
       id: settings?.user?.id,
       username: settings?.username,
@@ -89,8 +85,4 @@ export async function updateSettings(settings: any) {
     if (error) {
       throw error;
     }
-
-  } catch (error) {
-    alert(error.message);
-  } 
 }

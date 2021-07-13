@@ -12,6 +12,7 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
+import { useProfileImage } from "../ruzova_app/users";
 
 const useStyles = makeStyles((theme) => ({
   large: {
@@ -55,12 +56,13 @@ const AvatarProfile = ({
   stories = false,
 }: any) => {
   const classes = useStyles();
-  // const [avatarUrl, setAvatarUrl] = useState<any>(null);
+  const [avatarUrl, setAvatarUrl] = useState<any>(null);
   const [uploading, setUploading] = useState<any>(false);
 
-  // useEffect(() => {
-  //   if (url_live) setAvatarUrl(url_live);
-  // }, [url_live]);
+  const { data: new_url } = useProfileImage(url);
+  useEffect(() => {
+    if (new_url) setAvatarUrl(new_url);
+  }, [new_url]);
 
   // console.log(avatarUrl);
   // async function downloadImage(path: string) {
@@ -112,7 +114,7 @@ const AvatarProfile = ({
       {url && stories ? (
         <>
           <Avatar
-            src={url}
+            src={avatarUrl}
             alt="Avatar"
             component="div"
             className={
@@ -124,7 +126,7 @@ const AvatarProfile = ({
         </>
       ) : (
         <Avatar
-          src={url}
+          src={new_url}
           alt="Avatar"
           component="div"
           className={largeAvatar ? classes.large : classes.normal}

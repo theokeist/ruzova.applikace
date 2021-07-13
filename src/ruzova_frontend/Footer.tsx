@@ -21,13 +21,9 @@ export default function Footer() {
   React.useEffect(() => {
     setUsers(user);
     setLivePost(user?.live_post);
+    setUrl(user?.avatar_url);
   }, [user]);
 
-  const { data: url_live } = useProfileImage(users?.avatar_url);
-
-  React.useEffect(() => {
-    setUrl(url_live);
-  }, [url_live]);
   const toggleDrawer = (open: any) => (event: any) => {
     if (
       event &&

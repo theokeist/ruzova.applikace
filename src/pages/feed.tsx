@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import supabase from "../ruzova_app/_supabase";
 import { Card, Grid, Typography, CircularProgress } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import PostCard from "../ruzova_frontend/PostCard";
@@ -17,14 +16,14 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 export default function Feed() {
   const classes = useStyles();
-  const [posts, setPosts] = useState<any>([]);
+  const [profiles, setProfiles] = useState<any>([]);
   const [loading, setLoading] = useState(true);
 
-  const { data: profiles } = useProfiles();
+  const { data: profilesResponse } = useProfiles();
   useEffect(() => {
-    setPosts(profiles);
+    setProfiles(profilesResponse);
     setLoading(false);
-  }, [profiles]);
+  }, [profilesResponse]);
 
   if (loading)
     return (
@@ -40,7 +39,8 @@ export default function Feed() {
         <CircularProgress />;
       </Grid>
     );
-  if (!posts?.length) return <Typography variant="h3">No posts :-/</Typography>;
+  if (!profiles?.length)
+    return <Typography variant="h3">No posts :-/</Typography>;
 
   return (
     <PrivateRoute>
@@ -48,9 +48,9 @@ export default function Feed() {
         <Typography variant="h4" className={classes.feeds} gutterBottom>
           Feed
         </Typography>
-        {posts.map((post: any, index: any) => (
-          <Link key={post.id} href={`/posts/${post.id}`}>
-            <PostCard key={index} postsProps={post}></PostCard>
+        {profiles.map((profile: any, index: any) => (
+          <Link key={profile.id} href={`/posts/${profile.id}`}>
+            <PostCard key={index} postsProps={profile}></PostCard>
           </Link>
         ))}
       </Grid>

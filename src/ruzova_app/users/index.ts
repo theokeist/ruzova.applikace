@@ -103,7 +103,6 @@ export function useSettingsUpdate(options = {}) {
   return useMutation<any, any, any>(settings => updateSettings(settings), {
     onSuccess: () => {
       queryClient.invalidateQueries('profiles')
-      queryClient.invalidateQueries("userImage");
       queryClient.invalidateQueries("user"); 
     },
     ...options

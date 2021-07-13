@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import supabase from "../ruzova_app/_supabase";
 import {
   Card,
   Grid,
@@ -8,14 +7,10 @@ import {
   CardActions,
   Collapse,
 } from "@material-ui/core";
-import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Stories from "react-insta-stories";
-import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import Image from "next/image";
 import AvatarProfile from "./Avatar";
-import { useProfileImage } from "../ruzova_app/users";
 
 const stories: any = [
   "https://images.unsplash.com/photo-1622495806758-5d8f62817275?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=363&q=80",
@@ -38,30 +33,14 @@ const PostCard = ({ postsProps, noStories = false }: any) => {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-  const handleStories = () => {
-    if (!noStories) {
-      setExpanded(!expanded);
-    }
-  };
-
-  const { data: url_live } = useProfileImage(postsProps?.avatar_url);
 
   const [post, setPosts] = useState<any>();
   const [url, setUrl] = useState<any>();
 
   useEffect(() => {
     setPosts(postsProps);
-    setUrl(url_live);
-  }, [postsProps, url_live]);
-
-  const deletePost = async (id: any) => {
-    return;
-  };
-
-  const showIcon = () => {
-    if (expanded) return <ExpandLessIcon />;
-    if (!expanded) return <ExpandMoreIcon />;
-  };
+    setUrl(postsProps?.avatar_url);
+  }, [postsProps]);
 
   const profiles = [
     "@xd64cardas",
@@ -71,19 +50,9 @@ const PostCard = ({ postsProps, noStories = false }: any) => {
     "@ORSZA",
     "@le0nad",
   ];
-  const avatars = [
-    "https://images.unsplash.com/photo-1624841592732-bc32717e564d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
-    "https://images.unsplash.com/photo-1624836200598-00faf0458e18?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
-    "https://images.unsplash.com/photo-1624605984842-6971e8b7b9d4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
-    "https://images.unsplash.com/photo-1549237511-bbe6a0979d6a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=334&q=80",
-    "https://images.unsplash.com/flagged/photo-1595514191830-3e96a518989b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
-    "https://images.unsplash.com/photo-1613005798967-632017e477c8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
-    "https://images.unsplash.com/photo-1595183265031-b4cb347a8353?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
-    "https://images.unsplash.com/photo-1549237511-bbe6a0979d6a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=334&q=80",
-  ];
+
   const randomProfiles = profiles[Math.floor(Math.random() * profiles.length)];
   const [randomProfile, setRandomProfile] = useState(randomProfiles);
-  const randomAvatars = avatars[Math.floor(Math.random() * avatars.length)];
 
   console.log(post);
   return (
