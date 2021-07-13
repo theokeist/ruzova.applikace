@@ -92,7 +92,12 @@ export default function Settings() {
 
   const { mutate: settingsUpdate } = useSettingsUpdate();
 
-  const updateProfileHandler = ({ user, username, website, avatar_url }) => {
+  const updateProfileHandler = ({
+    user,
+    username,
+    website,
+    avatar_url,
+  }: any) => {
     settingsUpdate({ user, username, website, avatar_url });
   };
 
