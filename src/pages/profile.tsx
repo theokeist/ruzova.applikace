@@ -54,26 +54,26 @@ export default function Profile() {
         <Grid
           container
           item
-          direction="column"
-          justify="center"
-          alignItems="center"
+          direction="row"
+          justify="space-evenly"
+          alignItems="flex-start"
           className={classes?.avatarContainer}
         >
           <Avatar src={avatar_url} className={classes?.large} />
-        </Grid>
 
-        <Grid container item direction="column" justify="flex-start">
-          <Typography variant="h5" style={{ fontWeight: "bold" }}>
-            {username}
-          </Typography>
+          <Grid item justify="flex-start">
+            <Typography variant="h5" style={{ fontWeight: "bold" }}>
+              {username}
+            </Typography>
 
-          <Typography
-            variant="subtitle1"
-            style={{ fontWeight: "bold", alignSelf: "flex-start" }}
-            gutterBottom
-          >
-            Prestiž : 782
-          </Typography>
+            <Typography
+              variant="subtitle1"
+              style={{ fontWeight: "bold", alignSelf: "flex-start" }}
+              gutterBottom
+            >
+              Prestiž : 782
+            </Typography>
+          </Grid>
         </Grid>
 
         <Typography style={{ marginTop: "20px" }}>{live_post}</Typography>

@@ -107,6 +107,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "justify",
     whiteSpace: "nowrap",
     textOverflow: "ellipsis",
+    userSelect: "none",
   },
   normal: {
     width: theme.spacing(6),

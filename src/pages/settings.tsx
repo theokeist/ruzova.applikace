@@ -56,33 +56,6 @@ export default function Settings() {
     setAvatarUrl(user?.avatar_url);
   }, [user]);
 
-  // async function getProfile(user: any) {
-  //   try {
-  //     setLoading(true);
-
-  //     let { data, error, status } = await supabase
-  //       .from("profiles")
-  //       .select(`username, website, avatar_url`)
-  //       .eq("id", user?.id)
-  //       .single();
-
-  //     if (error && status !== 406) {
-  //       throw error;
-  //     }
-
-  //     if (data) {
-  //       console.log(data);
-  //       setUsername(data.username);
-  //       setWebsite(data.website);
-  //       setAvatarUrl(data.avatar_url);
-  //     }
-  //   } catch (error) {
-  //     console.log(error?.message);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // }
-
   const { mutate: settingsUpdate } = useSettingsUpdate();
 
   const updateProfileHandler = (

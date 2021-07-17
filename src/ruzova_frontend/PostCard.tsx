@@ -215,6 +215,7 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: 1.25,
     //    whiteSpace: "nowrap",
     //textOverflow: "ellipsis",
+    userSelect: "none",
   },
   titleExpanded: {
     maxWidth: "100%",
@@ -223,6 +224,7 @@ const useStyles = makeStyles((theme) => ({
     whiteSpace: "nowrap",
     textOverflow: "ellipsis",
     lineHeight: 1.25,
+    userSelect: "none",
   },
 }));
 
