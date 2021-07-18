@@ -69,7 +69,7 @@ export default function Settings() {
 
   return (
     <PrivateRoute isLoading={isLoading}>
-      <Grid container justify="center" className={classes?.ONE}>
+      <Grid className={classes?.ONE}>
         <Grid
           container
           item
@@ -126,7 +126,6 @@ export default function Settings() {
         <Button
           fullWidth
           variant="contained"
-          size="small"
           color="primary"
           className={`${ruzova.button} ${classes.button}`}
           onClick={() =>
@@ -139,7 +138,6 @@ export default function Settings() {
         <Button
           fullWidth
           variant="text"
-          size="small"
           className={`${ruzova.button} ${classes.button}`}
           onClick={() => logoutMutation.mutate()}
         >

@@ -55,7 +55,7 @@ export default function Profile() {
           container
           item
           direction="row"
-          justify="space-evenly"
+          justify="space-between"
           alignItems="flex-start"
           className={classes?.avatarContainer}
         >
