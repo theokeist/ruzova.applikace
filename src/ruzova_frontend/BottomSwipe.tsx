@@ -66,7 +66,7 @@ const BottomSwipe = ({
               className={ruzova.input}
               value={livePost}
               onChange={handleChange}
-              rows={4}
+              rows={5}
               variant="outlined"
               multiline
               fullWidth

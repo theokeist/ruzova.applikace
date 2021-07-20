@@ -109,15 +109,16 @@ export function useSettingsUpdate(options = {}) {
   });
 }
 
-export function useLivePostUpdate(user: any, live_post: any) {
-  const queryClient = useQueryClient()
-  return useMutation(() => updateProfile(user, live_post), {
-    onSuccess: () => {
-      queryClient.invalidateQueries('profiles')
-      queryClient.invalidateQueries('user')
-    }
-  })
-}
+// export function useLivePostUpdate() {
+//   const queryClient = useQueryClient()
+//   const update = (user: any, live_post: any) => {updateProfile(user, live_post)}
+//   return useMutation<any, any, any>((u: any, post: any) => update(u, post), {
+//     onSuccess: () => {
+//       queryClient.invalidateQueries('profiles')
+//       queryClient.invalidateQueries('user')
+//     }
+//   })
+// }
 
 export function useLogOut() {
   const queryClient = useQueryClient()

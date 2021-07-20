@@ -2,11 +2,7 @@ import React, { useState } from "react";
 import { Grid } from "@material-ui/core";
 import BottomMenu from "./BottomMenu";
 import BottomSwipe from "./BottomSwipe";
-import {
-  useUser,
-  useLivePostUpdate,
-  useProfileImage,
-} from "../ruzova_app/users";
+import { useUser } from "../ruzova_app/users";
 
 import supabase from "../ruzova_app/_supabase";
 
@@ -34,8 +30,7 @@ export default function Footer() {
     }
 
     if (open === false && livePost !== users?.live_post) {
-      console.log(livePost !== users?.live_post);
-      updateProfile(livePost);
+      updateProfile();
     }
     setState(open);
   };
@@ -43,17 +38,15 @@ export default function Footer() {
   /// const postupdate = useLivePostUpdate(user, livePost);
 
   // Use mutation, invalidate Queries
-  async function updateProfile(live_post: any) {
+  async function updateProfile() {
     try {
       const updates = {
         id: users?.id,
-        live_post: live_post,
+        live_post: livePost,
         updated_at: new Date(),
       };
 
-      let { error } = await supabase
-        .from("profiles")
-        .upsert(updates, { returning: "minimal" });
+      let { error } = await supabase.from("profiles").update(updates);
 
       if (error) {
         throw error;
