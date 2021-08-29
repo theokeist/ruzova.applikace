@@ -1,18 +1,12 @@
-import { useEffect, useState } from "react";
-import supabase from "../ruzova_app/_supabase";
 import {
   Avatar,
-  Grid,
-  Button,
-  FormControl,
-  FormControlLabel,
-  Typography,
-  TextField,
-  IconButton,
+  Grid, IconButton
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
-import { useProfileImage } from "../ruzova_app/users";
+import { useEffect, useState } from "react";
+import { useProfileImage } from "../backend/users";
+import supabase from "../backend/_supabase";
 
 const useStyles = makeStyles((theme) => ({
   large: {

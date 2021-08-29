@@ -1,16 +1,10 @@
-import React from "react";
-import Link from "next/link";
-import { makeStyles } from "@material-ui/core/styles";
 import {
-  Grid,
-  Avatar,
-  Button,
-  Typography,
-  IconButton,
-  CircularProgress,
+  CircularProgress, IconButton
 } from "@material-ui/core";
-import { useUser } from "../ruzova_app/users";
+import { makeStyles } from "@material-ui/core/styles";
+import React from "react";
 import { useRuzovaTheme } from "./_ruzovaTheme";
+
 const RuzovaButton = ({ text, clickable }: any) => {
   const ruzova = useRuzovaTheme();
   return (

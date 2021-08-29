@@ -1,6 +1,6 @@
+import { CircularProgress, Grid } from "@material-ui/core";
 import { useRouter } from "next/router";
-import { useUser } from "../../ruzova_app/users";
-import { Grid, CircularProgress } from "@material-ui/core";
+import { useUser } from "../../backend/users";
 
 export default function PrivateRoute({ isLoading, children }: any) {
   const router = useRouter();

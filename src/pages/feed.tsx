@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
+import { CircularProgress, Grid, Typography } from "@material-ui/core";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Link from "next/link";
-import { Card, Grid, Typography, CircularProgress } from "@material-ui/core";
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import PostCard from "../ruzova_frontend/PostCard";
-import PrivateRoute from "../ruzova_frontend/auth/PrivateRoute";
-import { useProfiles } from "../ruzova_app/users";
+import { useEffect, useState } from "react";
+import { useProfiles } from "../backend/users";
+import PrivateRoute from "../frontend/auth/PrivateRoute";
+import PostCard from "../frontend/PostCard";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

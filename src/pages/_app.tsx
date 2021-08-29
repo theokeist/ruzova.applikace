@@ -1,15 +1,13 @@
-import { useState, useEffect } from "react";
-import "../../styles/globals.css";
-import type { AppProps } from "next/app";
-import { QueryClientProvider, QueryClient } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
-import { makeStyles } from "@material-ui/core/styles";
-import { Grid, Typography } from "@material-ui/core";
-import Head from "next/head";
-import { CssBaseline } from "@material-ui/core";
-import { createMuiTheme } from "@material-ui/core/styles";
+import { CssBaseline, Grid } from "@material-ui/core";
+import { createMuiTheme, makeStyles } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
-import Footer from "../ruzova_frontend/Footer";
+import type { AppProps } from "next/app";
+import Head from "next/head";
+import { useEffect } from "react";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
+import "../../styles/globals.css";
+import Footer from "../frontend/Footer";
 
 const queryClient = new QueryClient({
   defaultOptions: {

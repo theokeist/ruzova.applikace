@@ -1,8 +1,6 @@
-import Head from "next/head";
-import Image from "next/image";
-import styles from "../../styles/Home.module.css";
 import { Grid, Typography } from "@material-ui/core";
-import PublicRoute from "../ruzova_frontend/auth/PublicRoute";
+import Image from "next/image";
+import PublicRoute from "../frontend/auth/PublicRoute";
 
 export default function Home() {
   return (

@@ -1,19 +1,13 @@
-import { useState, useEffect } from "react";
-import supabase from "../ruzova_app/_supabase";
-import { Button, Grid, Typography, CircularProgress } from "@material-ui/core";
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import { TextField } from "@material-ui/core";
-import PrivateRoute from "../ruzova_frontend/auth/PrivateRoute";
+import { Button, Grid, TextField } from "@material-ui/core";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import { useEffect, useState } from "react";
 import {
-  useLogOut,
-  useProfileImage,
-  useSettingsUpdate,
-  useUser,
-} from "../ruzova_app/users";
-import AvatarProfile from "../ruzova_frontend/Avatar";
-import { useRuzovaTheme } from "../ruzova_frontend/_ruzovaTheme";
-import RuzovaButton from "../ruzova_frontend/RuzovaButton";
-import { useQueryClient } from "react-query";
+  useLogOut, useSettingsUpdate,
+  useUser
+} from "../backend/users";
+import PrivateRoute from "../frontend/auth/PrivateRoute";
+import AvatarProfile from "../frontend/Avatar";
+import { useRuzovaTheme } from "../frontend/_ruzovaTheme";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

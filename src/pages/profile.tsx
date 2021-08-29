@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
 import { Avatar, Grid, Typography } from "@material-ui/core";
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import PrivateRoute from "../ruzova_frontend/auth/PrivateRoute";
-import { useLogOut, useUser } from "../ruzova_app/users";
-import { useRuzovaTheme } from "../ruzova_frontend/_ruzovaTheme";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import { useEffect, useState } from "react";
+import { useUser } from "../backend/users";
+import PrivateRoute from "../frontend/auth/PrivateRoute";
+import { useRuzovaTheme } from "../frontend/_ruzovaTheme";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

@@ -1,18 +1,14 @@
-import React from "react";
-import Link from "next/link";
-import { makeStyles } from "@material-ui/core/styles";
 import {
-  Grid,
-  Avatar,
-  Button,
-  Typography,
-  Divider,
-  IconButton,
+  Avatar, Grid, IconButton, Typography
 } from "@material-ui/core";
-import LockOpenIcon from "@material-ui/icons/LockOpen";
-import LockIcon from "@material-ui/icons/Lock";
+import { makeStyles } from "@material-ui/core/styles";
 import HomeIcon from "@material-ui/icons/Home";
+import LockIcon from "@material-ui/icons/Lock";
+import LockOpenIcon from "@material-ui/icons/LockOpen";
+import Link from "next/link";
+import React from "react";
 import AvatarProfile from "./Avatar";
+
 const BottomMenu = ({ url, user, setDrawer, setState }: any) => {
   const classes = useStyles();
 

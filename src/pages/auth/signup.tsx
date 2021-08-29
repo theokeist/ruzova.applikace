@@ -1,11 +1,11 @@
-import { useRouter } from "next/router";
-import { useState } from "react";
-import { useCreateUser } from "../../ruzova_app/users";
-import { Grid, TextField, Button, CircularProgress } from "@material-ui/core";
+import { Button, Grid, TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Image from "next/image";
-import { useRuzovaTheme } from "../../ruzova_frontend/_ruzovaTheme";
-import PublicRoute from "../../ruzova_frontend/auth/PublicRoute";
+import { useRouter } from "next/router";
+import { useState } from "react";
+import { useCreateUser } from "../../backend/users";
+import PublicRoute from "../../frontend/auth/PublicRoute";
+import { useRuzovaTheme } from "../../frontend/_ruzovaTheme";
 
 export default function Signup() {
   const router = useRouter();

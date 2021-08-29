@@ -1,10 +1,9 @@
-import React, { useState } from "react";
 import { Grid } from "@material-ui/core";
+import React, { useState } from "react";
+import { useUser } from "../backend/users";
+import supabase from "../backend/_supabase";
 import BottomMenu from "./BottomMenu";
 import BottomSwipe from "./BottomSwipe";
-import { useUser } from "../ruzova_app/users";
-
-import supabase from "../ruzova_app/_supabase";
 
 export default function Footer() {
   const [state, setState] = useState(false);
